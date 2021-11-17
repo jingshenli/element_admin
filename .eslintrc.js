@@ -18,7 +18,7 @@ module.exports = {
     // "error" 或 2 - 开启规则，使用错误级别的错误：error (当被触发的时候，程序会退出)
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'quotes': 0,
+    quotes: 0,
     'space-before-function-paren': 'off'
     // 'comma-dangle': 1
   }
