@@ -9,6 +9,7 @@ function getPath(src) {
 }
 
 module.exports = {
+  // 配置 svg-sprite-loader 解析目录
   chainWebpack(config) {
     // config 就是webpack 默认的配置对象
 
@@ -28,5 +29,18 @@ module.exports = {
         symbolId: 'icon-[name]'
       })
       .end()
+  },
+
+  // 配置代理服务器
+  devServer: {
+    proxy: {
+      // 只代理api开头的网络请求
+      '/api': {
+        // 代理目的网址
+        target: 'https://api.imooc-admin.lgdsunday.club',
+        // 是否开启代理
+        changeOrigin: true
+      }
+    }
   }
 }

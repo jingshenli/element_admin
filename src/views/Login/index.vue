@@ -1,6 +1,11 @@
 <template>
   <div class="login-container">
-    <el-form class="login-form" :rules="loginRules">
+    <el-form
+      class="login-form"
+      :model="loginForm"
+      :rules="loginRules"
+      ref="loginRef"
+    >
       <div class="title-container">
         <h3 class="title">用户登录</h3>
       </div>
@@ -29,7 +34,7 @@
         <el-input
           v-model="loginForm.password"
           placeholder="password"
-          name="passwaord"
+          name="password"
           :type="flag ? 'password' : 'text'"
         ></el-input>
         <!-- 密码的显示和隐藏图标 -->
@@ -37,7 +42,10 @@
           <svg-icon :iconName="flag ? '不可见' : '可见'" />
         </span>
       </el-form-item>
-      <el-button type="primary" style="width: 100%; margin-top: 30px"
+      <el-button
+        type="primary"
+        style="width: 100%; margin-top: 30px"
+        @click="handleLogin"
         >登录</el-button
       >
     </el-form>
@@ -45,29 +53,60 @@
 </template>
 <script setup>
 import { ref } from 'vue'
+import { passwordValidate } from './rule.js'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+// useRouter 路由表所有信息
+// Router 当前路由匹配的东西
+
+// 表单双向数据绑定的值=数据
 const loginForm = ref({
-  username: '',
-  password: ''
+  username: 'super-admin',
+  password: '123456'
 })
-// const loginRules = ref({
-//   username: [
-//     {
-//       required: true,
-//       message: '不能为空',
-//       trigger: 'blur'
-//     }
-//   ],
-//   password: [
-//     {
-//       required: true,
-//       trigger: 'blur',
-//       message: '不能为空'
-//     }
-//   ]
-// })
+// 表单验证
+const loginRules = ref({
+  username: [
+    {
+      required: true, // 内容是否能为空
+      trigger: 'blur', // 在什么条件下触发
+      message: '不能为空' // 错误信息
+    }
+  ],
+  password: [
+    {
+      // 使用了 validator以后是不能再使用 requried
+      trigger: 'blur',
+      validator: passwordValidate() // 这个方法的返回值就是验证以后的结果
+    }
+  ]
+})
+
+// 小眼睛，切换是password还是text
 const flag = ref(true)
 function toggleIcon() {
   flag.value = !flag.value
+}
+
+// 登录逻辑
+// 定义整个表单的ref
+const loginRef = ref(null)
+const store = useStore()
+const router = useRouter()
+const handleLogin = () => {
+  // 1、验证拿到的表单数据是否合法,每有几个验证规则的这个回调函数就会调用几次
+  loginRef.value.validate((validate) => {
+    if (!validate) {
+      return // 当其中一个规则没有通过，就跳出回调函数，都成功了才能执行下面的逻辑
+    }
+    // 验证通过后执行登录的逻辑，保存token
+    store.dispatch('user/login', loginForm.value).then((res) => {
+      // 只有在登录成功以后才可以执行跳转
+      router.push({
+        name: 'Index'
+      })
+    })
+  })
 }
 </script>
 <style lang="scss" scoped>
@@ -78,7 +117,7 @@ $cursor: #fff;
 .login-container {
   min-height: 100%;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background: $bg;
   overflow: hidden;
 

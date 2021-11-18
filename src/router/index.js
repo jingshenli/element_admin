@@ -3,9 +3,16 @@ import Login from '../views/Login/index.vue'
 
 const routes = [
   {
-    path: '/',
+    path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/',
+    name: 'Index',
+    component: () => {
+      return import('@/views/layout/index.vue')
+    }
   }
 ]
 
