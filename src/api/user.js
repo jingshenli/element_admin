@@ -8,3 +8,11 @@ export const login1 = function (data) {
     data
   })
 }
+
+// 获取用户数据
+export const getUserInfo = () => {
+  return axios.request({
+    url: '/sys/profile',
+    method: 'GET'
+  })
+}

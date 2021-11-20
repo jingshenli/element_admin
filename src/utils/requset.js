@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
+import { isCheckTimeOut } from './auth.js'
 // 导入stor
 import store from '@/store/index.js'
 
@@ -12,6 +13,12 @@ const server = axios.create({
 server.interceptors.request.use(
   (config) => {
     if (store.getters.token) {
+      if (!isCheckTimeOut()) {
+        // 过期后执行退出
+        store.dispatch('user/logout')
+        // 不应该请求
+        return Promise.reject(new Error('token 过期'))
+      }
       // 请求的不是login
       config.headers.Authorization = `Bearar ${store.getters.token}`
     }
@@ -41,10 +48,20 @@ server.interceptors.response.use(
     }
   },
   (error) => {
+    // token 失效 code -> 401单点登录 后台会返回特定的状态码
+    if (
+      error.response &&
+      error.response.data &&
+      error.response.data.code === 401
+    ) {
+      // 过期时执行退出
+      store.dispatch('user/logout')
+    }
+
     // 当服务器没有返回数据或者是服务器未知错误
     ElMessage({
       type: 'error',
-      message: 'xxx'
+      message: error.message
     })
     // 对响应错误做点什么
     return Promise.reject(error)

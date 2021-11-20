@@ -10,13 +10,17 @@ router.beforeEach((to, from, next) => {
       2、用户登录后 token 未过期之前，不允许进去login页面
   */
   //  判断store里面含不含有token，判断有没有登录
-  console.log(store.getters.token, '11111')
   if (store.getters.token) {
-    // 也就是你要去的地方里面的地址为 login 的时候不可以，会自己跳到 / 上面
+    // 也就是你要去的地方里面的地址为 login 的时候不 可以，会自己跳到 / 上面
     if (to.path === '/login') {
       // 不允许
       next('/')
     } else {
+      // 登陆成功 跳转到首页
+      if (!store.getters.hasUserInfo) {
+        // 判断有没有用户的信息 发送axios
+        store.dispatch('user/getUserInfo')
+      }
       next()
     }
   } else {
