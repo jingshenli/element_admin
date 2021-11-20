@@ -35,7 +35,6 @@ server.interceptors.request.use(
 server.interceptors.response.use(
   (response) => {
     // 对响应数据做点什么 对的数据 错的数据
-    console.log(response)
     const { success, data, message } = response.data
     if (success) {
       return data

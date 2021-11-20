@@ -3,6 +3,7 @@ import md5 from 'md5'
 import * as utils from '@/utils/storage.js'
 import { TOKEN, USER_INFO } from '../../common/common.js'
 import router from '@/router/index.js'
+import { setTimeStamp } from '../../utils/auth.js'
 const state = {
   token: utils.getItem(TOKEN) || '',
   userInfo: utils.getItem(USER_INFO) || ''
@@ -32,7 +33,7 @@ const actions = {
           // 保存 token 到 vuex中 和 本地中
           context.commit('setToken', res.token)
           // 记录token的时间
-
+          setTimeStamp()
           resolve()
         })
         .catch((err) => {
