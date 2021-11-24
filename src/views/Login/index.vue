@@ -12,8 +12,9 @@
       <!-- 用户名组件 -->
       <el-form-item prop="username">
         <!-- 用户图标 -->
+
         <span class="svg-container">
-          <svg-icon iconName="账号" />
+          <svg-icon iconName="user" />
         </span>
         <!-- input框 -->
         <el-input
@@ -28,7 +29,7 @@
       <el-form-item prop="password">
         <!-- 密码图标 -->
         <span class="svg-container">
-          <svg-icon iconName="密码" />
+          <svg-icon iconName="password" />
         </span>
         <!-- input -->
         <el-input
@@ -39,7 +40,7 @@
         ></el-input>
         <!-- 密码的显示和隐藏图标 -->
         <span class="svg-container" @click="toggleIcon">
-          <svg-icon :iconName="flag ? '不可见' : '可见'" />
+          <svg-icon :iconName="flag ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
       <el-button
@@ -141,7 +142,7 @@ $cursor: #fff;
     overflow: hidden;
 
     :deep(.el-form-item) {
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(160, 156, 156, 0.1);
       background: rgba(0, 0, 0, 0.1);
       border-radius: 5px;
       color: #454545;
