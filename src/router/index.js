@@ -9,7 +9,7 @@ const PrivateRoutes = [
 
     redirect: '/user/manage',
     meta: {
-      title: '用户',
+      title: 'user',
       icon: 'personnel'
     },
     children: [
@@ -17,7 +17,7 @@ const PrivateRoutes = [
         path: '/user/manage',
         component: () => import('@/views/user-manage/index'),
         meta: {
-          title: '用户管理',
+          title: 'userManage',
           icon: 'personnel-manage'
         }
       },
@@ -25,7 +25,7 @@ const PrivateRoutes = [
         path: '/user/role',
         component: () => import('@/views/role-list/index'),
         meta: {
-          title: '角色列表',
+          title: 'roleList',
           icon: 'role'
         }
       },
@@ -33,7 +33,7 @@ const PrivateRoutes = [
         path: '/user/permission',
         component: () => import('@/views/permission-list/index'),
         meta: {
-          title: '权限列表',
+          title: 'permissionList',
           icon: 'permission'
         }
       },
@@ -60,7 +60,7 @@ const PrivateRoutes = [
     component: () => import('@/views/layout/index.vue'),
     redirect: '/article/ranking',
     meta: {
-      title: '文章',
+      title: 'article',
       icon: 'article'
     },
     children: [
@@ -68,7 +68,7 @@ const PrivateRoutes = [
         path: '/article/ranking',
         component: () => import('@/views/article-ranking/index'),
         meta: {
-          title: '文章排名',
+          title: 'articleRanking',
           icon: 'article-ranking'
         }
       },
@@ -83,7 +83,7 @@ const PrivateRoutes = [
         path: '/article/create',
         component: () => import('@/views/article-create/index'),
         meta: {
-          title: '创建文章',
+          title: 'articleCreate',
           icon: 'article-create'
         }
       },
@@ -116,7 +116,7 @@ const PublicRoutes = [
         name: 'profile',
         component: () => import('@/views/profile/index'),
         meta: {
-          title: '个人中心',
+          title: 'profile',
           icon: 'user'
         }
       },

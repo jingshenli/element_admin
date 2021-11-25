@@ -7,7 +7,8 @@
       ref="loginRef"
     >
       <div class="title-container">
-        <h3 class="title">用户登录</h3>
+        <h3 class="title">{{ $t('msg.login.title') }}</h3>
+        <select-lang class="select-lang" />
       </div>
       <!-- 用户名组件 -->
       <el-form-item prop="username">
@@ -47,16 +48,20 @@
         type="primary"
         style="width: 100%; margin-top: 30px"
         @click="handleLogin"
-        >登录</el-button
+        >{{ $t('msg.login.loginBtn') }}</el-button
       >
+      <!-- 账号提示 tips -->
+      <div class="tips" v-html="$t('msg.login.desc')"></div>
     </el-form>
   </div>
 </template>
 <script setup>
-import { ref } from 'vue'
-import { passwordValidate } from './rule.js'
+import { ref, watch } from 'vue'
+import { passwordValidate, usernameValidate } from './rule.js'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+import SelectLang from '@/components/SelectLang/index.vue'
+
 // useRouter 路由表所有信息
 // Router 当前路由匹配的东西
 
@@ -71,7 +76,8 @@ const loginRules = ref({
     {
       required: true, // 内容是否能为空
       trigger: 'blur', // 在什么条件下触发
-      message: '不能为空' // 错误信息
+      // message: i18n.t('msg.login.usernameRule') // 错误信息 这样写不具备响应式
+      validator: usernameValidate()
     }
   ],
   password: [
@@ -109,6 +115,16 @@ const handleLogin = () => {
     })
   })
 }
+
+// 监听 getters.language 的变化
+watch(
+  () => store.getters.language,
+  (newValue, oldValue) => {
+    // 发生了中英文切换 验证要重新执行
+    loginRef.value.validateField('username')
+    loginRef.value.validateField('password')
+  }
+)
 </script>
 <style lang="scss" scoped>
 $bg: #2d3a4b;
@@ -130,6 +146,15 @@ $cursor: #fff;
       margin: 0 auto 40px auto;
       text-align: center;
       font-weight: bold;
+    }
+    :deep(.select-lang) {
+      position: absolute;
+      top: 4px;
+      right: 0px;
+      background-color: white;
+      font-size: 24px;
+      border-radius: 4px;
+      cursor: pointer;
     }
   }
 
@@ -167,6 +192,12 @@ $cursor: #fff;
       color: $dark_gray;
       vertical-align: middle;
       display: inline-block;
+    }
+    .tips {
+      font-size: 14px;
+      line-height: 28px;
+      color: white;
+      margin-bottom: 10px;
     }
   }
 }
