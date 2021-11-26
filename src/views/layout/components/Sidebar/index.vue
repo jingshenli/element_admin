@@ -15,6 +15,7 @@
 import Logo from '@/assets/logo.png'
 import SidebarMenu from './SidebarMenu.vue'
 import { useStore } from 'vuex'
+
 const store = useStore()
 </script>
 <style lang="scss" scoped>
