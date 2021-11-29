@@ -19,12 +19,6 @@ defineProps({
     requried: true
   }
 })
-
-// 因为第一个icon图标显示不出来，所以用自己的方法修改了他的el-icon变成的svg需要的类名
-// var prop = { ...props }
-// if (prop.title === 'profile') {
-//   prop.icon = 'user'
-// }
 </script>
 <style lang="scss" scoped>
 .sideClass {
