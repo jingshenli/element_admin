@@ -12,8 +12,10 @@
     <div class="main-container">
       <div class="fixed-header">
         <nav-bar />
+        <tag-view />
       </div>
-      <app-main />
+      <!-- tag view -->
+      <app-main class="appmain"/>
     </div>
   </div>
 </template>
@@ -21,7 +23,9 @@
 import SideBar from './components/Sidebar/index.vue'
 import NavBar from './components/Navbar/index.vue'
 import AppMain from './components/Appmain/index.vue'
+import TagView from '@/components/TagView/index.vue'
 import { useStore } from 'vuex'
+
 const store = useStore()
 </script>
 <style lang="scss" scoped>
@@ -50,5 +54,8 @@ const store = useStore()
 .hideSidebar .fixed-header {
   width: calc(100% - #{$sideBarhideWidth});
   transition: width 0.28s;
+}
+.appmain{
+  margin-top: 34px;
 }
 </style>

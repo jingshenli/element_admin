@@ -12,6 +12,8 @@ export const LANGUAGE = 'language'
 // 主题色
 export const MYCOLOR = 'theme_color'
 
+export const TAG_VIEWS = 'tag_views'
+
 // el-color-picker 默认颜色
 export const predefineColor = [
   '#ff4500',
