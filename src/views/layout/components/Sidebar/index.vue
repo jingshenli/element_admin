@@ -1,21 +1,20 @@
 <template>
-  <div>
+  <div class="">
     <!-- logo -->
     <div class="logo-container">
-      <el-avatar :src="Logo" shape="square" />
-      <h1 class="logo-title" v-if="store.getters.sideBarOpen">element-admin</h1>
+      <el-avatar :src="logo" shape="square" />
+      <h1 class="logo-title" v-if="store.getters.sideBarOpen">ele-admin</h1>
     </div>
-    <!-- 滚动的组件 -->
+    <!-- 包裹一个滚动组件 -->
     <el-scrollbar>
       <sidebar-menu />
     </el-scrollbar>
   </div>
 </template>
 <script setup>
-import Logo from '@/assets/logo.png'
 import SidebarMenu from './SidebarMenu.vue'
+import logo from '@/assets/logo.png'
 import { useStore } from 'vuex'
-
 const store = useStore()
 </script>
 <style lang="scss" scoped>
@@ -25,12 +24,10 @@ const store = useStore()
   display: flex;
   align-items: center;
   justify-content: center;
-
   :deep(.el-avatar) {
     --el-avatar-background-color: none;
   }
-
-  .logo-title {
+  .logo-title{
     margin-left: 10px;
     color: #fff;
     font-weight: 600;

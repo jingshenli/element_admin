@@ -1,12 +1,12 @@
 <template>
   <div class="navbar">
     <!-- 切换侧边栏的组件 -->
-    <cuttle class="cuttle-containers" />
+    <cuttle class="cuttle-container" />
     <!-- 面包屑 -->
     <breadcrumb class="breadcrumb-container" />
     <div class="right-menu">
       <!-- 导航搜索 -->
-      <search class="right-menu-item" />
+      <search />
       <!-- 全屏切换 -->
       <screen-full class="right-menu-item" />
       <!-- 主题换肤 -->
@@ -38,10 +38,10 @@ import Cuttle from '@/components/Cuttle/index.vue'
 import Breadcrumb from '@/components/Breadcrumb/index.vue'
 import SelectLang from '@/components/SelectLang/index.vue'
 import Theme from '@/components/Theme/index.vue'
-import ScreenFull from '@/components/ScreenFull/index.vue'
+import ScreenFull from '@/components/Screenfull/index.vue'
 import Search from '@/components/Search/index.vue'
 
-var store = useStore()
+const store = useStore()
 // 主动退出
 const logout = () => {
   store.dispatch('user/logout')
@@ -52,26 +52,13 @@ const logout = () => {
   height: 50px;
   overflow: hidden;
   position: relative;
-  background-color: #fff;
-  border-bottom: 1px solid #e1dddd;
-  border-radius: 0 1px 4px rgba(0, 21, 41, 0.08);
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 21, 41.08);
   .right-menu {
     display: flex;
     align-items: center;
     float: right;
     padding-right: 16px;
-
-    :deep(.right-menu-item) {
-      display: inline-block;
-      padding: 0 18px 0 0;
-      font-size: 24px;
-      color: #ccc;
-      vertical-align: text-bottom;
-      // &:hover {
-      //   // background-color: rgba(0, 0, 0, 0.1);
-      // }
-    }
-
     .avatar-container {
       cursor: pointer;
       .avatar-wrapper {
@@ -79,12 +66,23 @@ const logout = () => {
         position: relative;
         :deep(.el-avatar) {
           --el-avatar-background-color: none;
-          margin-right: 5px;
+          margin-right: 10px;
         }
       }
     }
   }
-  .cuttle-containers {
+
+  :deep(.right-menu-item) {
+    display: inline-block;
+    padding: 0 7px 0 18px;
+    font-size: 24px;
+    color: #fff;
+    vertical-align: text-bottom;
+    line-height: 50px;
+    cursor: pointer;
+  }
+
+  .cuttle-container {
     line-height: 50px;
     height: 100%;
     float: left;
@@ -94,6 +92,7 @@ const logout = () => {
       background: rgba(0, 0, 0, 0.1);
     }
   }
+
   .breadcrumb-container {
     height: 50px;
     line-height: 50px;

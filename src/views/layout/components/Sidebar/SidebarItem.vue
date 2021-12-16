@@ -16,15 +16,13 @@
     <menu-item :title="route.meta.title" :icon="route.meta.icon" />
   </el-menu-item>
 </template>
-
 <script setup>
 import { defineProps } from 'vue'
-import MenuItem from './MenuItem.vue'
-
+import MenuItem from './MenuItem'
 defineProps({
   route: {
     type: Object,
-    requried: true
+    required: true
   }
 })
 </script>

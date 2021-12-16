@@ -6,14 +6,11 @@
 
 <script setup>
 import { useStore } from 'vuex'
-import zhCn from 'element-plus/lib/locale/lang/zh-cn.js'
-import en from 'element-plus/lib/locale/lang/en.js'
+import zhCn from 'element-plus/lib/locale/lang/zh-cn'
+import en from 'element-plus/lib/locale/lang/en'
 import { generateNewStyle, writeStyleToHearTag } from '@/utils/theme.js'
-
 const store = useStore()
 generateNewStyle(store.getters.theme_color).then((res) => {
   writeStyleToHearTag(res)
 })
 </script>
-
-<style></style>

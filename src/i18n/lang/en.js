@@ -138,7 +138,9 @@ export default {
     importSuccess: ' Employee data imported successfully',
     dialogTitle1: 'Are you sure you want to delete the user ',
     dialogTitle2: ' Is it?',
-    roleDialogTitle: 'Configure roles'
+    roleDialogTitle: 'Configure roles',
+    nodateFormate: 'no date formate',
+    noExcelFile: 'file is not excel'
   },
   role: {
     buttonTxt: 'New Role',
@@ -151,7 +153,9 @@ export default {
     dialogTitle: 'New role',
     dialogRole: 'Role Name',
     dialogDesc: 'Role description',
-    updateRoleSuccess: 'User role updated successfully'
+    updateRoleSuccess: 'User role updated successfully',
+    toggleTitle1: 'show',
+    toggleTitle2: 'hide'
   },
   permission: {
     name: 'Authority name',

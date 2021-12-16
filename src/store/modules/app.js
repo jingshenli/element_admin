@@ -1,9 +1,9 @@
-import { LANGUAGE } from '@/common/common.js'
 import { getItem, setItem } from '@/utils/storage.js'
+import { LANGUAGE } from '@/common/common.js'
 
 const state = {
   sideBarOpened: true,
-  language: getItem(LANGUAGE) || 'zh'
+  language: getItem(LANGUAGE) || ''
 }
 const mutations = {
   toggleSideBar(state) {
@@ -14,6 +14,7 @@ const mutations = {
     state.language = lang
   }
 }
+
 export default {
   namespaced: true,
   state,

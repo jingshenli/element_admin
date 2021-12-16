@@ -1,10 +1,13 @@
 // 还原默认样式
 @import './reset.scss';
-// 定义了有关css的全局变量
+
+// 定义css的全局变量
 @import './variables.scss';
-// 定义公共函数
+
+// 定义公共scss函数
 @import './common.scss';
+
 // 覆盖element-plus 默认的侧边导航栏样式
 @import './sidebar.scss';
-// 动画效果
+
 @import './transition.scss'

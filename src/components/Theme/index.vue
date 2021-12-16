@@ -21,12 +21,14 @@
     </template>
   </el-dropdown>
   <!-- 弹出的模态框 -->
-  <select-color :showDialogVariable="showDialogVariable" @closeDialog="hideSelectColor" />
+  <select-color
+    :showDialogVariable="showDialogVariable"
+    @closeDialog="hideSelectColor"
+  />
 </template>
 <script setup>
-import selectColor from './components/selectColor.vue'
+import SelectColor from './components/selectColor.vue'
 import { ref } from 'vue'
-
 const showDialogVariable = ref(false)
 const showSelectColor = () => {
   showDialogVariable.value = true

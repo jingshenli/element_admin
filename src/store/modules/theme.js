@@ -7,10 +7,11 @@ export default {
     myColor: getItem(MYCOLOR) || '#cccccc'
   },
   mutations: {
-    //   设置主题色
+    // 设置主题色
     setMyColor(state, color) {
-      setItem(MYCOLOR, color)
       state.myColor = color
+      // 保存到本地存储
+      setItem(MYCOLOR, color)
     }
   }
 }

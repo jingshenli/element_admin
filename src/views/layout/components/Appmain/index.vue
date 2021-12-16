@@ -1,12 +1,14 @@
 <template>
   <div class="app-main">
-    <!-- 二级路由显示容器 -->
     <router-view v-slot="{ Component }">
       <transition name="fade" mode="out-in">
-        <component :is="Component"></component>
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
       </transition>
     </router-view>
   </div>
+  <!-- 二级路由显示容器 -->
 </template>
 <script setup>
 import { watch } from 'vue'
@@ -15,21 +17,22 @@ import { useStore } from 'vuex'
 import { isNoTag } from '@/utils/tag.js'
 import { getTitle as getTitle_, watchLang } from '@/utils/i18n.js'
 
-const route = useRoute()
-const store = useStore()
-
-// 获取 title
+// 获取title
 const getTitle = (to) => {
   if (!to.meta || !to.meta.title) {
-    // 如果不存在 title
+    // 如果不存在title
     const tmp = to.path.split('/')
     return tmp[tmp.length - 1]
   } else {
-    // 如果存在 title ：约定以 path 的最后一项最为它的 title
+    // 如果存在title --> 以 path 的最后一项作为 title
     return getTitle_(to.meta.title)
   }
 }
-// 监听当前的路由变化  -->  增加 tag 到指定位置
+
+const route = useRoute()
+const store = useStore()
+
+// 监听当前路由变化 --> 添加 tag 到指定位置
 watch(
   route,
   (to, from) => {
@@ -48,27 +51,28 @@ watch(
       title: getTitle(to)
     })
   },
-  { immediate: true }
+  {
+    immediate: true
+  }
 )
 
-// 当国际化切换，
+// 当国际化切换
 watchLang(() => {
-  // 要重新更新 vuex 中的 title 的值
-  store.getters.tagViewList.forEach((route, index) => {
-    store.commit('tag/changeTitle', {
-      index: index,
-      route: { ...route, title: getTitle(route) } // 不能使用 getTitle_(route.title)
-    })
+  // 重新更新vuex中的title值
+  const tmpArr = []
+  store.getters.tagViewList.forEach((route) => {
+    tmpArr.push({ ...route, title: getTitle(route) }) // 不能使用getTitle_(route.title)
   })
+  store.commit('tag/changeTitle', tmpArr)
 })
 </script>
 <style lang="scss" scoped>
 .app-main {
   min-height: calc(100vh - 50px);
   width: 100%;
-  // position: relative;
+  position: relative;
   overflow: hidden;
-  padding: 62px 20px 20px 20px;
+  padding: 61px 20px 20px 20px;
   box-sizing: border-box;
 }
 </style>

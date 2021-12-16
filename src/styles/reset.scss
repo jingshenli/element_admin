@@ -4,7 +4,6 @@ div,
 span,
 applet,
 object,
-iframe,
 h2,
 h3,
 h4,
@@ -78,14 +77,14 @@ time,
 mark,
 audio,
 video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  font-weight: normal;
+  vertical-align: baseline;
 }
-
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -98,35 +97,44 @@ hgroup,
 menu,
 nav,
 section {
-    display: block;
+  display: block;
 }
-
-body {
-    line-height: 1;
-}
-
 ol,
-ul {
-    list-style: none;
+ul,
+li {
+  list-style: none;
 }
-
 blockquote,
 q {
-    quotes: none;
+  quotes: none;
 }
-
 blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-    content: '';
-    content: none;
+  content: '';
+  content: none;
 }
-
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
+th,
+td {
+  vertical-align: middle;
+}
+/* custom */
 a {
-    text-decoration: none;
+  outline: none;
+  color: #16418a;
+  text-decoration: none;
+  -webkit-backface-visibility: hidden;
+}
+a:focus {
+  outline: none;
+}
+input:focus,
+select:focus,
+textarea:focus {
+  outline: -webkit-focus-ring-color auto 0;
 }

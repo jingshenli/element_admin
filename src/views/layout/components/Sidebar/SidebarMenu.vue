@@ -19,31 +19,27 @@ import { filterRouter, generateMenus } from '@/utils/router.js'
 import { computed } from 'vue'
 import SidebarItem from './SidebarItem.vue'
 import { useStore } from 'vuex'
-var store = useStore()
-
+const store = useStore()
 const router = useRouter()
+
 // 获取路由
-// console.log(router)
+// console.log(router.getRoutes())
 // 去重
 // console.log(filterRouter(router.getRoutes()))
 // 格式化
 // console.log(generateMenus(filterRouter(router.getRoutes())))
 
-// 因为以后路由要变化，所以用计算属性
+// 因为以后路由要变化,所以用计算属性
 const routes = computed(() => {
   const filterRoutes = filterRouter(router.getRoutes())
   return generateMenus(filterRoutes)
 })
 
 const route = useRoute()
-// 因为以后的路由是要变化的
+// 以后激活的路由要变化
 const activePath = computed(() => {
   const { path } = route
   return path
 })
 </script>
-<style lang="scss" scoped>
-.svgicon {
-  margin-right: 10px;
-}
-</style>
+<style lang="scss" scoped></style>

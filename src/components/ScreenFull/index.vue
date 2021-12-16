@@ -3,7 +3,7 @@
     <svg-icon
       :iconName="isScreenFull ? 'exit-fullscreen' : 'fullscreen'"
       @click="toggleScreenFull"
-      class="screenIcon"
+      className="screenIcon"
     ></svg-icon>
   </div>
 </template>
@@ -14,13 +14,8 @@ import screenfull from 'screenfull'
 const isScreenFull = ref(false)
 const toggleScreenFull = () => {
   isScreenFull.value = !isScreenFull.value
-  // 使用 screenfull 插件实现全屏切换
-  screenfull.toggle() // 默认是 body 切换
+  // 使用 screenfull 插件完成全屏切换
+  screenfull.toggle()
 }
 </script>
-<style lang="scss" scoped>
-.screenIcon {
-  fill: currentColor;
-  color: #333939;
-}
-</style>
+<style lang="scss" scoped></style>

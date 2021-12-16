@@ -15,14 +15,16 @@ export default {
         setItem(TAG_VIEWS, state.tagViewList)
       }
     },
-    // 更新在 tagViewList 中的指定索引的 每一个 title
-    changeTitle(state, { index, route }) {
-      state.tagViewList[index] = route
+
+    // 更新 tagViewList 中的指定索引的 title
+    changeTitle(state, tagViewList) {
+      state.tagViewList = tagViewList
       setItem(TAG_VIEWS, state.tagViewList)
     },
+
     /*
       关闭业务
-      parama: paylod : {'type' : 'index || other || right' ,index : index}
+      params:paylod:{type:"index||other||right",index:index}
     */
     closeTag(state, paylod) {
       if (paylod.type === 'index') {
@@ -33,7 +35,7 @@ export default {
         state.tagViewList = [state.tagViewList[paylod.index]]
       } else if (paylod.type === 'right') {
         // 关闭右侧
-        state.tagViewList.splice(paylod.index + 1, state.tagViewList.length)
+        state.tagViewList.splice(paylod.index + 1, state.tagViewList.length - 1)
       }
       setItem(TAG_VIEWS, state.tagViewList)
     }

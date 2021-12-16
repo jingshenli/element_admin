@@ -15,6 +15,7 @@ const toggleSideBar = () => {
   store.commit('app/toggleSideBar')
 }
 </script>
+
 <style lang="scss" scoped>
 .cuttle_container {
   padding: 0 16px;
